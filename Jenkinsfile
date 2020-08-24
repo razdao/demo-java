@@ -6,10 +6,17 @@ pipeline {
           sh 'mvn compile sonar:sonar package'
         }
       }
-    }
-    post { 
-        always { 
-            echo 'I will always say Hello again!'
+      stage ('Delivery') {
+        publishers {
+          publishOverSsh {
+            configName('DO-tomcat')
+            transferSet {
+              sourceFiles('target/*.war')
+              removePrefix('target/')
+              execCommand('systemctl restart tomcat')
+            }
+          }
         }
+      }
     }
 }
