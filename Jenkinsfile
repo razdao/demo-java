@@ -7,17 +7,19 @@ pipeline {
         }
       }
       stage ('Delivery') {
-        sshPublisher(
-        publishers {
-          publishOverSsh {
-            configName('DO-tomcat')
-            transferSet {
-              sourceFiles('target/*.war')
-              removePrefix('target/')
-              execCommand('systemctl restart tomcat')
+        steps{
+          sshPublisher(
+          publishers {
+            publishOverSsh {
+              configName('DO-tomcat')
+              transferSet {
+                sourceFiles('target/*.war')
+                removePrefix('target/')
+                execCommand('systemctl restart tomcat')
+              }
             }
-          }
-        })
+          })
+        }
       }
     }
 }
