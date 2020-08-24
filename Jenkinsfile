@@ -7,6 +7,7 @@ pipeline {
         }
       }
       stage ('Delivery') {
+        sshPublisher(
         publishers {
           publishOverSsh {
             configName('DO-tomcat')
@@ -16,7 +17,7 @@ pipeline {
               execCommand('systemctl restart tomcat')
             }
           }
-        }
+        })
       }
     }
 }
