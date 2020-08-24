@@ -7,9 +7,10 @@ pipeline {
         }
       }
       stage ('Delivery') {
-        steps{
+        steps {
+          script {
           sshPublisher(
-          publishers {
+          publishers: [
             publishOverSsh {
               configName('DO-tomcat')
               transferSet {
@@ -18,7 +19,7 @@ pipeline {
                 execCommand('systemctl restart tomcat')
               }
             }
-          })
+          ])}
         }
       }
     }
