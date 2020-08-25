@@ -7,19 +7,20 @@ pipeline {
         }
       }
       stage ('Delivery') {
-        steps {
-          script {
+        steps([$class: 'BapSshPromotionPublisherPlugin']) {
           sshPublisher(
-          publishers: [
-            configName:"DO-tomcat",
-            transfers: [
-              sshTransfer(
-                sourceFiles:"target/*.war",
-                removePrefix:"target/",
-                execCommand:"systemctl restart tomcat"
+            continueOnError: false, failOnError: true,
+            publishers: [
+              sshPublisherDesc(
+                configName: "DO-tomcat",
+                verbose: true,
+                  transfers: [
+                    sshTransfer(sourceFiles: "target/*.war"),
+                    sshTransfer(execCommand: "systemctl restart tomcat"),
+                  ]
               )
             ]
-          ])}
+          )
         }
       }
     }
