@@ -11,13 +11,11 @@ pipeline {
           script {
           sshPublisher(
           publishers: [
-            publishOverSsh {
-              configName('DO-tomcat')
-              transferSet {
-                sourceFiles('target/*.war')
-                removePrefix('target/')
-                execCommand('systemctl restart tomcat')
-              }
+            configName('DO-tomcat')
+            transferSet {
+              sourceFiles('target/*.war')
+              removePrefix('target/')
+              execCommand('systemctl restart tomcat')
             }
           ])}
         }
