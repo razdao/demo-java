@@ -11,9 +11,9 @@ pipeline {
           script {
           sshPublisher(
           publishers: [
-            configName:'DO-tomcat',
+            configName('DO-tomcat'),
             transfers [
-              sourceFiles:'target/*.war',
+              sourceFiles('target/*.war'),
               removePrefix:'target/',
               execCommand:'systemctl restart tomcat'
             ]
