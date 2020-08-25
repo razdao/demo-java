@@ -12,11 +12,11 @@ pipeline {
           sshPublisher(
           publishers: [
             configName('DO-tomcat')
-            transferSet {
+            transfers [
               sourceFiles('target/*.war')
               removePrefix('target/')
               execCommand('systemctl restart tomcat')
-            }
+            ]
           ])}
         }
       }
