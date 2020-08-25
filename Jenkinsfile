@@ -11,7 +11,7 @@ pipeline {
           script {
           sshPublisher(
           publishers: [
-            configName:'DO-tomcat':,
+            configName:"DO-tomcat",
             transfers: [
               sshTransfer(
               sourceFiles:"target/*.war",
