@@ -14,9 +14,9 @@ pipeline {
             configName:"DO-tomcat",
             transfers: [
               sshTransfer(
-              sourceFiles:"target/*.war",
-              removePrefix:"target/",
-              execCommand:"systemctl restart tomcat"
+                sourceFiles:"target/*.war",
+                removePrefix:"target/",
+                execCommand:"systemctl restart tomcat"
               )
             ]
           ])}
